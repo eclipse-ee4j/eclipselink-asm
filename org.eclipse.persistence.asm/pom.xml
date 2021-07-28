@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 
-    Copyright (c) 2019, 2021 Oracle and/or its affiliates. All rights reserved.
+    Copyright (c) 2021 Oracle, IBM Corporation, and/or their affiliates. All rights reserved.
 
     This program and the accompanying materials are made available under the
     terms of the Eclipse Public License v. 2.0 which is available at
@@ -27,14 +27,14 @@
 
     <groupId>org.eclipse.persistence</groupId>
     <artifactId>org.eclipse.persistence.asm</artifactId>
-    <version>9.1.0-SNAPSHOT</version>
+    <version>9.1.1-SNAPSHOT</version>
 
     <name>EclipseLink ASM</name>
-    <description>Comprehensive and universal persistence framework for Java.</description>
+    <description>EclipseLink extension for Java bytecode manipulation and analysis framework</description>
 
     <scm>
-        <connection>scm:git:https://github.com/eclipse-ee4j/eclipselink.git</connection>
-        <url>https://github.com/eclipse-ee4j/eclipselink.git</url>
+        <connection>scm:git:https://github.com/eclipse-ee4j/eclipselink-asm.git</connection>
+        <url>https://github.com/eclipse-ee4j/eclipselink-asm.git</url>
     </scm>
 
     <organization>
@@ -60,7 +60,7 @@
 
     <issueManagement>
         <system>github</system>
-        <url>https://github.com/eclipse-ee4j/eclipselink/issues</url>
+        <url>https://github.com/eclipse-ee4j/eclipselink-asm/issues</url>
     </issueManagement>
 
     <mailingLists>
@@ -81,7 +81,7 @@
     </mailingLists>
 
     <properties>
-        <legal.doc.source>${project.basedir}/../..</legal.doc.source>
+        <legal.doc.source>${project.basedir}/..</legal.doc.source>
         <!-- 2.6.x has Java SE 7 as min supported JDK -->
         <base.java.level>7</base.java.level>
         <upper.java.level>9</upper.java.level>

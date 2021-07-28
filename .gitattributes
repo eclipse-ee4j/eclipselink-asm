@@ -1,0 +1,9 @@
+#source files
+* text=auto
+*.html text diff=html
+*.java text diff=java
+*.md text
+*.xml text
+
+#binaries
+*.class binary
