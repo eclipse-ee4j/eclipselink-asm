@@ -142,7 +142,7 @@ spec:
                 container('el-build') {
                     git branch: GIT_BRANCH_RELEASE, credentialsId: SSH_CREDENTIALS_ID, url: GIT_REPOSITORY_URL
                     sh '''
-                        etc/jenkins/release_asm.sh "${ASM_VERSION}" "${NEXT_ASM_VERSION}" "${DRY_RUN}" "${OVERWRITE_GIT}" "${OVERWRITE_STAGING}"
+                        etc/jenkins/release.sh "${ASM_VERSION}" "${NEXT_ASM_VERSION}" "${DRY_RUN}" "${OVERWRITE_GIT}" "${OVERWRITE_STAGING}"
                     '''
                 }
             }

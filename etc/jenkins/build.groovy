@@ -54,7 +54,15 @@ pipeline {
         stage('Build') {
             steps {
                 sh '''
-                    etc/jenkins/build_asm.sh
+                    etc/jenkins/build.sh
+                '''
+            }
+        }
+        // Publish to snapshots
+        stage('Publish to snapshots') {
+            steps {
+                sh '''
+                    etc/jenkins/publish_snapshots.sh
                 '''
             }
         }
