@@ -12,7 +12,7 @@
 # Arguments:
 #  N/A
 
-if [ ${CONTINUOUS_BUILD} = "true" ]; then
+if [ "${CONTINUOUS_BUILD}" = "true" ]; then
     echo '-[ EclipseLink ASM Publish to Jakarta Snapshots -> No publishing any artifacts]-----------------------------------------------------------'
 else
     echo '-[ EclipseLink ASM Publish to Jakarta Snapshots ]-----------------------------------------------------------'

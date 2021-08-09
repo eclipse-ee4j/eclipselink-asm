@@ -16,6 +16,7 @@
 //   GIT_USER_EMAIL      - Git user e-mail (for commits)
 //   SSH_CREDENTIALS_ID  - Jenkins ID of SSH credentials
 //   GPG_CREDENTIALS_ID  - Jenkins ID of GPG credentials (stored as KEYRING variable)
+//   CONTINUOUS_BUILD    - false - full nightly build with snapshots build publish
 
 pipeline {
 
