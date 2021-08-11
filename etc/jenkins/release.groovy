@@ -139,11 +139,13 @@ spec:
         // Perform release
         stage('Build and release EclipseLink ASM') {
             steps {
-                container('el-build') {
-                    git branch: GIT_BRANCH_RELEASE, credentialsId: SSH_CREDENTIALS_ID, url: GIT_REPOSITORY_URL
-                    sh '''
+                git branch: GIT_BRANCH_RELEASE, credentialsId: SSH_CREDENTIALS_ID, url: GIT_REPOSITORY_URL
+                sshagent([SSH_CREDENTIALS_ID]) {
+                    container('el-build') {
+                        sh '''
                         etc/jenkins/release.sh "${ASM_VERSION}" "${NEXT_ASM_VERSION}" "${DRY_RUN}" "${OVERWRITE_GIT}" "${OVERWRITE_STAGING}"
                     '''
+                    }
                 }
             }
         }
