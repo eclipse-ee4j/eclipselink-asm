@@ -9,6 +9,9 @@
 [//]: # " SPDX-License-Identifier: EPL-2.0 OR BSD-3-Clause "
 
 # EclipseLink-ASM
+[![Maven Central](https://img.shields.io/maven-central/v/org.eclipse.persistence/org.eclipse.persistence.asm.svg?label=Maven%20Central)](https://mvnrepository.com/artifact/org.eclipse.persistence/org.eclipse.persistence.asm)
+[![Jakarta Staging (Snapshots)](https://img.shields.io/nexus/s/https/jakarta.oss.sonatype.org/org.eclipse.persistence/org.eclipse.persistence.asm.svg)](https://jakarta.oss.sonatype.org/content/repositories/staging/org/eclipse/persistence/org.eclipse.persistence.asm)
+[![Master Build Status](https://ci.eclipse.org/eclipselink/job/eclipselink-nightly-master/badge/icon)](https://ci.eclipse.org/eclipselink/job/asm-build)
 
 This is a library [EclipseLink](https://github.com/eclipse-ee4j/eclipselink) uses for weaving
 and bytecode manipulation. It's build on top of [ASM](https://asm.ow2.io/).
