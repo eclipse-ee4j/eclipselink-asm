@@ -15,9 +15,9 @@ package org.eclipse.persistence.internal.libraries.asm;
 
 import java.security.AccessController;
 import java.security.PrivilegedAction;
-import java.util.SortedMap;
-import java.util.Collections;
-import java.util.TreeMap;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -29,23 +29,7 @@ public class EclipseLinkASMClassWriter extends ClassWriter {
 
     private static final Logger LOG = Logger.getLogger(EclipseLinkASMClassWriter.class.getName());
 
-    private final int version = getLatestOPCodeVersion();
-
-    private static final SortedMap<String, Integer> versionMap = Collections.unmodifiableSortedMap(new TreeMap<String, Integer>() {
-        {
-            put("1.7", Opcodes.V1_7);
-            put("1.8", Opcodes.V1_8);
-            put("9", Opcodes.V9);
-            put("10", Opcodes.V10);
-            put("11", Opcodes.V11);
-            put("12", Opcodes.V12);
-            put("13", Opcodes.V13);
-            put("14", Opcodes.V14);
-            put("15", Opcodes.V15);
-            put("16", Opcodes.V16);
-            put("17", Opcodes.V17);
-        }
-    });
+    private static final int version = getLatestOPCodeVersion();
 
     public EclipseLinkASMClassWriter() {
         this(ClassWriter.COMPUTE_FRAMES);
@@ -78,8 +62,25 @@ public class EclipseLinkASMClassWriter extends ClassWriter {
     }
 
     private static int getLatestOPCodeVersion() {
+        final LinkedHashMap<String, Integer> versionMap = new LinkedHashMap<String, Integer>();
+        versionMap.put("1.7", Opcodes.V1_7);
+        versionMap.put("1.8", Opcodes.V1_8);
+        versionMap.put("9", Opcodes.V9);
+        versionMap.put("10", Opcodes.V10);
+        versionMap.put("11", Opcodes.V11);
+        versionMap.put("12", Opcodes.V12);
+        versionMap.put("13", Opcodes.V13);
+        versionMap.put("14", Opcodes.V14);
+        versionMap.put("15", Opcodes.V15);
+        versionMap.put("16", Opcodes.V16);
+        versionMap.put("17", Opcodes.V17);
+
+        final List<String> versions = new ArrayList<String>(versionMap.keySet());
+        final String oldest = versions.get(0);
+        final String latest = versions.get(versions.size() - 1);
+
         // let's default to oldest supported Java SE version
-        String v = versionMap.firstKey();
+        String v = oldest;
         if (System.getSecurityManager() == null) {
             v = System.getProperty("java.specification.version");
         } else {
@@ -101,7 +102,6 @@ public class EclipseLinkASMClassWriter extends ClassWriter {
         Integer version = versionMap.get(v);
         if (version == null) {
             // current JDK is either too new
-            String latest = versionMap.lastKey();
             if (latest.compareTo(v) < 0) {
                 LOG.log(Level.WARNING, "Java SE ''{0}'' is not fully supported yet. Report this error to the EclipseLink open source project.", v);
                 if (LOG.isLoggable(Level.FINE)) {
@@ -110,7 +110,7 @@ public class EclipseLinkASMClassWriter extends ClassWriter {
                 version = versionMap.get(latest);
             } else {
                 // or too old
-                String key = versionMap.firstKey();
+                String key = oldest;
                 LOG.log(Level.WARNING, "Java SE ''{0}'' is too old.", v);
                 if (LOG.isLoggable(Level.FINE)) {
                     LOG.log(Level.FINE, "Generating bytecode for Java SE ''{0}''.", key);
