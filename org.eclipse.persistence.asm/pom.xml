@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 
-    Copyright (c) 2021 Oracle, IBM Corporation, and/or their affiliates. All rights reserved.
+    Copyright (c) 2021, 2022 Oracle, IBM Corporation, and/or their affiliates. All rights reserved.
 
     This program and the accompanying materials are made available under the
     terms of the Eclipse Public License v. 2.0 which is available at
@@ -86,7 +86,7 @@
         <base.java.level>7</base.java.level>
         <upper.java.level>9</upper.java.level>
         <!-- CQ #23713 -->
-        <asm.version>9.2</asm.version>
+        <asm.version>9.3</asm.version>
         <junit.version>4.13.2</junit.version>
     </properties>
 
@@ -348,6 +348,12 @@
                                     <replacefilter>
                                         <replacetoken><![CDATA[new ArrayList<>(1)]]></replacetoken>
                                         <replacevalue><![CDATA[new ArrayList<T>(1)]]></replacevalue>
+                                    </replacefilter>
+                                </replace>
+                                <replace file="${project.build.directory}/generated-sources/asm-src/org/eclipse/persistence/internal/libraries/asm/tree/analysis/SourceValue.java">
+                                    <replacefilter>
+                                        <replacetoken><![CDATA[new SmallSet<>()]]></replacetoken>
+                                        <replacevalue><![CDATA[new SmallSet<AbstractInsnNode>()]]></replacevalue>
                                     </replacefilter>
                                 </replace>
                             </target>
