@@ -85,7 +85,7 @@
         <!-- 2.6.x has Java SE 7 as min supported JDK -->
         <base.java.level>7</base.java.level>
         <upper.java.level>9</upper.java.level>
-        <!-- CQ #23713 -->
+        <!-- CQ #24052 -->
         <asm.version>9.3</asm.version>
         <junit.version>4.13.2</junit.version>
     </properties>
