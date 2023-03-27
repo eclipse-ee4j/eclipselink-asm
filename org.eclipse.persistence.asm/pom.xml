@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 
-    Copyright (c) 2021, 2022 Oracle, IBM Corporation, and/or their affiliates. All rights reserved.
+    Copyright (c) 2021, 2023 Oracle, IBM Corporation, and/or their affiliates. All rights reserved.
 
     This program and the accompanying materials are made available under the
     terms of the Eclipse Public License v. 2.0 which is available at
@@ -27,7 +27,7 @@
 
     <groupId>org.eclipse.persistence</groupId>
     <artifactId>org.eclipse.persistence.asm</artifactId>
-    <version>9.4.0-SNAPSHOT</version>
+    <version>9.5.0-SNAPSHOT</version>
 
     <name>EclipseLink ASM</name>
     <description>EclipseLink extension for Java bytecode manipulation and analysis framework</description>
@@ -86,9 +86,19 @@
         <base.java.level>7</base.java.level>
         <upper.java.level>9</upper.java.level>
         <!-- CQ #24269 -->
-        <asm.version>9.4</asm.version>
+        <asm.version>9.5</asm.version>
         <junit.version>4.13.2</junit.version>
     </properties>
+
+	<pluginRepositories>
+		<pluginRepository>
+			<id>dash-licenses-snapshots</id>
+			<url>https://repo.eclipse.org/content/repositories/dash-licenses-snapshots/</url>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</pluginRepository>
+	</pluginRepositories>
 
     <dependencyManagement>
         <dependencies>
@@ -215,6 +225,19 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-antrun-plugin</artifactId>
                     <version>3.0.0</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.eclipse.dash</groupId>
+                    <artifactId>license-tool-plugin</artifactId>
+                    <version>0.0.1-SNAPSHOT</version>
+                    <executions>
+                        <execution>
+                            <id>license-check</id>
+                            <goals>
+                                <goal>license-check</goal>
+                            </goals>
+                        </execution>
+                    </executions>
                 </plugin>
             </plugins>
         </pluginManagement>
