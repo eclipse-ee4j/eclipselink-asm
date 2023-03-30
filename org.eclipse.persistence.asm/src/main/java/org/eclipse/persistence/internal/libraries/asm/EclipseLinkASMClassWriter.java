@@ -13,13 +13,16 @@
 //      Oracle - initial API and implementation
 package org.eclipse.persistence.internal.libraries.asm;
 
+import java.lang.reflect.Field;
 import java.security.AccessController;
 import java.security.PrivilegedAction;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Pattern;
 
 /**
  * EclipseLink specific {@link ClassVisitor} that generates a corresponding ClassFile structure
@@ -62,22 +65,19 @@ public class EclipseLinkASMClassWriter extends ClassWriter {
     }
 
     private static int getLatestOPCodeVersion() {
-        final LinkedHashMap<String, Integer> versionMap = new LinkedHashMap<String, Integer>();
-        versionMap.put("1.7", Opcodes.V1_7);
-        versionMap.put("1.8", Opcodes.V1_8);
-        versionMap.put("9", Opcodes.V9);
-        versionMap.put("10", Opcodes.V10);
-        versionMap.put("11", Opcodes.V11);
-        versionMap.put("12", Opcodes.V12);
-        versionMap.put("13", Opcodes.V13);
-        versionMap.put("14", Opcodes.V14);
-        versionMap.put("15", Opcodes.V15);
-        versionMap.put("16", Opcodes.V16);
-        versionMap.put("17", Opcodes.V17);
-        versionMap.put("18", Opcodes.V18);
-        versionMap.put("19", Opcodes.V19);
-        versionMap.put("20", Opcodes.V20);
-        versionMap.put("21", Opcodes.V21);
+        final Map<String, Integer> versionMap = new LinkedHashMap<>();
+        Pattern searchPattern = Pattern.compile("^V\\d((_\\d)?|\\d*)");
+        try {
+            Class opcodesClazz = Opcodes.class;
+            for (Field f : opcodesClazz.getDeclaredFields()) {
+                if (searchPattern.matcher(f.getName()).matches()) {
+                    versionMap.put(f.getName().replace("V","").replace('_', '.'), f.getInt(opcodesClazz));
+                }
+            }
+        } catch (ReflectiveOperationException | SecurityException ex) {
+            LOG.log(Level.SEVERE, "Error Java versions map from Opcodes.class fields.", ex);
+            throw new RuntimeException(ex);
+        }
 
         final List<String> versions = new ArrayList<String>(versionMap.keySet());
         final String oldest = versions.get(0);
