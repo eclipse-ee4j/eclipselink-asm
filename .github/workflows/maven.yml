@@ -1,0 +1,46 @@
+#
+# Copyright (c) 2023 Contributors to the Eclipse Foundation
+#
+# This program and the accompanying materials are made available under the
+# terms of the Eclipse Public License v. 2.0 which is available at
+# http://www.eclipse.org/legal/epl-2.0,
+# or the Eclipse Distribution License v. 1.0 which is available at
+# http://www.eclipse.org/org/documents/edl-v10.php.
+#
+# SPDX-License-Identifier: EPL-2.0 OR BSD-3-Clause
+#
+
+name: EclipseLink ASM PR build
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Test on JDK ${{ matrix.java_version }}
+    runs-on: ubuntu-latest
+
+    concurrency:
+      group: ${{ github.ref }}
+      cancel-in-progress: true
+
+    strategy:
+      matrix:
+        java_version: [ 17 ]
+
+    steps:
+      - name: Checkout for build
+        uses: actions/checkout@v3
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: ${{ matrix.java_version }}
+          cache: maven
+      - name: Verify
+        run: mvn -B -V -U -C -f org.eclipse.persistence.asm/pom.xml -Poss-release,license-check clean verify -Dgpg.skip=true
