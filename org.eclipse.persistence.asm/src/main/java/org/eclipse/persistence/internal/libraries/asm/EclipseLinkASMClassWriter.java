@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Oracle, IBM Corporation, and/or their affiliates. All rights reserved.
+ * Copyright (c) 2021, 2023 Oracle, IBM Corporation, and/or their affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0 which is available at
@@ -74,6 +74,10 @@ public class EclipseLinkASMClassWriter extends ClassWriter {
         versionMap.put("15", Opcodes.V15);
         versionMap.put("16", Opcodes.V16);
         versionMap.put("17", Opcodes.V17);
+        versionMap.put("18", Opcodes.V18);
+        versionMap.put("19", Opcodes.V19);
+        versionMap.put("20", Opcodes.V20);
+        versionMap.put("21", Opcodes.V21);
 
         final List<String> versions = new ArrayList<String>(versionMap.keySet());
         final String oldest = versions.get(0);
