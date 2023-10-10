@@ -68,7 +68,7 @@ public class EclipseLinkASMClassWriter extends ClassWriter {
         final Map<String, Integer> versionMap = new LinkedHashMap<>();
         Pattern searchPattern = Pattern.compile("^V\\d((_\\d)?|\\d*)");
         try {
-            Class opcodesClazz = Opcodes.class;
+            Class<Opcodes> opcodesClazz = Opcodes.class;
             for (Field f : opcodesClazz.getDeclaredFields()) {
                 if (searchPattern.matcher(f.getName()).matches()) {
                     versionMap.put(f.getName().replace("V","").replace('_', '.'), f.getInt(opcodesClazz));
