@@ -43,12 +43,8 @@ jobs:
           java-version: ${{ matrix.java_version }}
           cache: maven
       - name: Verify
-        run: mvn -B -V -U -C -f org.eclipse.persistence.asm/pom.xml -Poss-release clean verify -Dgpg.skip=true
-      - name: License check
-        if: ${{ matrix.java_version }} == '17'
-        run: mvn -B -V -U -C -f org.eclipse.persistence.asm/pom.xml -Plicense-check clean verify -Dgpg.skip=true
+        run: mvn -B -V -U -C -f org.eclipse.persistence.asm/pom.xml -Poss-release,license-check clean verify -Dgpg.skip=true
       - name: Upload license-check info
-        if: ${{ matrix.java_version }} == '17'
         uses: actions/upload-artifact@v3
         with:
           name: license-summary.txt
