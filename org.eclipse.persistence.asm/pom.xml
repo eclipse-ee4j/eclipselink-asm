@@ -83,7 +83,7 @@
     <properties>
         <legal.doc.source>${project.basedir}/..</legal.doc.source>
         <!-- 2.6.x has Java SE 7 as min supported JDK -->
-        <base.java.level>7</base.java.level>
+        <base.java.level>8</base.java.level>
         <upper.java.level>9</upper.java.level>
         <!-- CQ #24269 -->
         <asm.version>9.6</asm.version>
@@ -204,7 +204,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-source-plugin</artifactId>
-                    <version>3.3.0</version>
+                    <version>3.2.1</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
