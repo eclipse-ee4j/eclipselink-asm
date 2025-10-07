@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Oracle, IBM Corporation, and/or their affiliates. All rights reserved.
+ * Copyright (c) 2023, 2025 Oracle, IBM Corporation, and/or their affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0 which is available at
@@ -12,15 +12,15 @@
 
 package org.eclipse.persistence.internal.libraries.asm;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.net.URL;
 
-import static junit.framework.TestCase.assertEquals;
-import static junit.framework.TestCase.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class EclipseLinkClassWriterTest {
 
