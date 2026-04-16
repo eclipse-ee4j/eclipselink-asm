@@ -81,8 +81,8 @@
 
     <properties>
         <legal.doc.source>${project.basedir}/..</legal.doc.source>
-        <!-- 2.6.x has Java SE 7 as min supported JDK -->
-        <base.java.level>8</base.java.level>
+        <!-- ASM 9.9.1 requires Java 9+ due to @Deprecated(forRemoval=true) -->
+        <base.java.level>9</base.java.level>
         <upper.java.level>9</upper.java.level>
         <!-- CQ #24269 -->
         <asm.version>9.9.1</asm.version>
