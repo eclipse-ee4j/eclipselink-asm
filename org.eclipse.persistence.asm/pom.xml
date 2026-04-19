@@ -22,7 +22,7 @@
     <description>EclipseLink extension for Java bytecode manipulation and analysis framework</description>
     <groupId>org.eclipse.persistence</groupId>
     <artifactId>org.eclipse.persistence.asm</artifactId>
-    <version>9.9.0-SNAPSHOT</version>
+    <version>9.9.1-SNAPSHOT</version>
 
     <parent>
         <groupId>org.eclipse.ee4j</groupId>
@@ -81,11 +81,11 @@
 
     <properties>
         <legal.doc.source>${project.basedir}/..</legal.doc.source>
-        <!-- 2.6.x has Java SE 7 as min supported JDK -->
+        <!-- ASM 9.9.1 uses Java 9+ features but we retrofit for Java 8 compatibility (EclipseLink 2.7+) -->
         <base.java.level>8</base.java.level>
         <upper.java.level>9</upper.java.level>
         <!-- CQ #24269 -->
-        <asm.version>9.9</asm.version>
+        <asm.version>9.9.1</asm.version>
         <junit.jupiter.version>6.0.0</junit.jupiter.version>
     </properties>
 
@@ -355,9 +355,9 @@
                             <goal>run</goal>
                         </goals>
                         <configuration>
-                            <!-- ASM itself uses 1.8 source level and then retrofits the bytecode
-                            to work on Java SE 5+. We don't use retrofitter, so we need
-                            to fix sources to compile for Java SE 7 (EclipseLink 2.6.x) -->
+                            <!-- ASM 9.9.1 uses Java 9+ features. We retrofit the sources
+                            to work on Java SE 8 (EclipseLink 2.7+) by removing/replacing
+                            Java 9+ specific syntax -->
                             <target>
                                 <replace file="${project.build.directory}/generated-sources/asm-src/org/eclipse/persistence/internal/libraries/asm/tree/Util.java">
                                     <replacefilter>
@@ -365,6 +365,10 @@
                                         <replacevalue><![CDATA[new ArrayList<T>(1)]]></replacevalue>
                                     </replacefilter>
                                 </replace>
+                                <!-- Remove Java 9+ @Deprecated(forRemoval=...) parameter for Java 8 compatibility -->
+                                <replaceregexp match="@Deprecated\(forRemoval\s*=\s*(true|false)\)" replace="@Deprecated" flags="g">
+                                    <fileset dir="${project.build.directory}/generated-sources/asm-src" includes="**/*.java"/>
+                                </replaceregexp>
                             </target>
                         </configuration>
                     </execution>
