@@ -44,8 +44,3 @@ jobs:
           cache: maven
       - name: Verify
         run: mvn -B -V -U -C -f org.eclipse.persistence.asm/pom.xml -Poss-release,license-check clean verify -Dgpg.skip=true
-      - name: Upload license-check info
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
-        with:
-          name: license-summary.txt
-          path: org.eclipse.persistence.asm/target/dash/summary
