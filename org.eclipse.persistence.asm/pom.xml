@@ -365,13 +365,8 @@
                                         <replacevalue><![CDATA[new ArrayList<T>(1)]]></replacevalue>
                                     </replacefilter>
                                 </replace>
-<<<<<<< HEAD
-                                <!-- Remove Java 9+ @Deprecated(forRemoval=...) parameter for Java 8 compatibility -->
-                                <replaceregexp match="@Deprecated\(forRemoval\s*=\s*(true|false)\)" replace="@Deprecated" flags="g">
-=======
                                 <!-- Remove forRemoval attribute from @Deprecated annotations for Java 8 compatibility -->
                                 <replaceregexp match="@Deprecated\(forRemoval\s*=\s*(true|false)\)" replace="@Deprecated" flags="g" byline="true">
->>>>>>> 03e3d50 (Update Java Version)
                                     <fileset dir="${project.build.directory}/generated-sources/asm-src" includes="**/*.java"/>
                                 </replaceregexp>
                             </target>
