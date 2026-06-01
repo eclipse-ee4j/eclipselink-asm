@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 
-    Copyright (c) 2021, 2025 Oracle, IBM Corporation, and/or their affiliates. All rights reserved.
+    Copyright (c) 2021, 2026 Oracle, IBM Corporation, and/or their affiliates. All rights reserved.
 
     This program and the accompanying materials are made available under the
     terms of the Eclipse Public License v. 2.0 which is available at
@@ -22,7 +22,7 @@
     <description>EclipseLink extension for Java bytecode manipulation and analysis framework</description>
     <groupId>org.eclipse.persistence</groupId>
     <artifactId>org.eclipse.persistence.asm</artifactId>
-    <version>9.9.1-SNAPSHOT</version>
+    <version>9.10.0-SNAPSHOT</version>
 
     <parent>
         <groupId>org.eclipse.ee4j</groupId>
@@ -365,8 +365,8 @@
                                         <replacevalue><![CDATA[new ArrayList<T>(1)]]></replacevalue>
                                     </replacefilter>
                                 </replace>
-                                <!-- Remove Java 9+ @Deprecated(forRemoval=...) parameter for Java 8 compatibility -->
-                                <replaceregexp match="@Deprecated\(forRemoval\s*=\s*(true|false)\)" replace="@Deprecated" flags="g">
+                                <!-- Remove forRemoval attribute from @Deprecated annotations for Java 8 compatibility -->
+                                <replaceregexp match="@Deprecated\(forRemoval\s*=\s*(true|false)\)" replace="@Deprecated" flags="g" byline="true">
                                     <fileset dir="${project.build.directory}/generated-sources/asm-src" includes="**/*.java"/>
                                 </replaceregexp>
                             </target>
