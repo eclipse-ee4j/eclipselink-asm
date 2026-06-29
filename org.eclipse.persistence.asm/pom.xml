@@ -85,8 +85,8 @@
         <base.java.level>8</base.java.level>
         <upper.java.level>9</upper.java.level>
         <!-- CQ #24269 -->
-        <asm.version>9.10</asm.version>
-        <junit.jupiter.version>6.1.0</junit.jupiter.version>
+        <asm.version>9.10.1</asm.version>
+        <junit.jupiter.version>6.1.1</junit.jupiter.version>
     </properties>
 
     <dependencyManagement>
